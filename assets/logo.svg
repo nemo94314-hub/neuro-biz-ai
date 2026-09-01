@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="50%" style="stop-color:#1a1a4e"/>
+      <stop offset="100%" style="stop-color:#2d1b69"/>
+    </linearGradient>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#b8c6ff"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6c63ff"/>
+      <stop offset="100%" style="stop-color:#00d4ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Фон круг -->
+  <circle cx="200" cy="200" r="180" fill="url(#bg)" stroke="url(#accent)" stroke-width="3"/>
+
+  <!-- Мозг (упрощённый) -->
+  <path d="M150 140 
+           C120 140 100 170 100 200 
+           C100 230 120 260 150 260 
+           L250 260 
+           C280 260 300 230 300 200 
+           C300 170 280 140 250 140 Z" 
+        fill="url(#brain)" opacity="0.95" stroke="#6c63ff" stroke-width="2"/>
+  
+  <!-- Извилины мозга -->
+  <path d="M140 180 C160 170 180 190 200 180 C220 170 240 190 260 180" 
+        fill="none" stroke="#1a1a4e" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 200 C160 190 180 210 200 200 C220 190 240 210 260 200" 
+        fill="none" stroke="#1a1a4e" stroke-width="4" stroke-linecap="round"/>
+  <path d="M140 220 C160 210 180 230 200 220 C220 210 240 230 260 220" 
+        fill="none" stroke="#1a1a4e" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Глаза -->
+  <circle cx="170" cy="180" r="8" fill="#1a1a4e"/>
+  <circle cx="230" cy="180" r="8" fill="#1a1a4e"/>
+  <circle cx="172" cy="178" r="3" fill="#6c63ff"/>
+  <circle cx="232" cy="178" r="3" fill="#6c63ff"/>
+
+  <!-- Текст "Neuro" -->
+  <text x="200" y="340" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700" fill="#ffffff" letter-spacing="4">
+    Neuro
+  </text>
+  
+  <!-- Текст "Biz AI" -->
+  <text x="200" y="380" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="600" fill="url(#accent)" letter-spacing="3">
+    Biz AI
+  </text>
+</svg>
