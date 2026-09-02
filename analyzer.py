@@ -2,6 +2,9 @@ import re
 from collections import Counter
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import LatentDirichletAllocation
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from io import BytesIO
 
 def analyze_answers(answers):
     """
@@ -56,3 +59,50 @@ def analyze_answers(answers):
         "repeated_words": repeated_words[:10],
         "suggestions": suggestions
     }
+
+
+def generate_analysis_pdf(report):
+    """
+    Генерирует PDF-отчёт с результатами анализа.
+    """
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
+    y = height - 50
+    
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(50, y, "Отчёт по анализу интервью")
+    y -= 40
+    
+    c.setFont("Helvetica", 12)
+    c.drawString(50, y, f"Ключевые слова: {', '.join(report['keywords'])}")
+    y -= 25
+    
+    c.drawString(50, y, "Основные темы:")
+    y -= 20
+    for topic in report['topics']:
+        c.drawString(70, y, f"- {topic}")
+        y -= 20
+    
+    y -= 10
+    c.drawString(50, y, f"Всего слов: {report['total_words']}")
+    y -= 25
+    c.drawString(50, y, f"Средняя длина ответа: {report['avg_answer_length']} слов")
+    y -= 25
+    
+    if report['repeated_words']:
+        c.drawString(50, y, f"Повторяющиеся идеи: {', '.join(report['repeated_words'])}")
+        y -= 25
+    
+    if report['suggestions']:
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(50, y, "Рекомендации:")
+        y -= 20
+        c.setFont("Helvetica", 12)
+        for suggestion in report['suggestions']:
+            c.drawString(70, y, suggestion)
+            y -= 20
+    
+    c.save()
+    buffer.seek(0)
+    return buffer
