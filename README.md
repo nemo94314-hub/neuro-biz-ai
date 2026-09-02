@@ -49,7 +49,7 @@ python -m pip install streamlit pandas reportlab
 - Помогает с покупкой лицензии
 
 **Как попробовать:**
-👉 [@NeuroBizAIbot](https://t.me/NeuroBizAIbot)
+👉 [@NeuroBiAIbot](https://t.me/NeuroBiAIbot)
 
 **Команды бота:**
 - `/start` — приветствие и ссылка на скачивание
@@ -61,3 +61,8 @@ python -m pip install streamlit pandas reportlab
 ```bash
 pip install pyTelegramBotAPI
 python bot.py
+
+## 🌐 Сайт
+
+Подробная информация о продукте, ценах и контактах — на нашем сайте:  
+👉 [https://nemo94314-hub.github.io/neuro-biz-ai](https://nemo94314-hub.github.io/neuro-biz-ai)
