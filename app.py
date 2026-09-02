@@ -9,6 +9,7 @@ from reportlab.lib.pagesizes import A4
 from datetime import datetime
 from llm_tuner.collect import DEFAULT_QUESTIONS as BASE_QUESTIONS
 from llm_tuner.utils import save_jsonl, format_chat_template
+from analyzer import analyze_answers  # <--- Добавлен импорт анализатора
 
 # ============================================
 # 🌙 ТЁМНАЯ ТЕМА (CSS)
@@ -74,7 +75,6 @@ st.markdown(
             color: #ffffff !important;
             border-left: 4px solid #6c63ff !important;
         }
-        /* Радиокнопки */
         .stRadio > div {
             color: #ffffff;
         }
@@ -88,7 +88,7 @@ st.markdown(
 # ============================================
 
 # --- 1. ПАРОЛЬ ДЛЯ РАЗРАБОТЧИКОВ ---
-ADMIN_PASSWORD = "9w2dncrfjbmp"
+ADMIN_PASSWORD = "ваш_пароль_здесь"
 
 if "auth" not in st.session_state:
     st.session_state.auth = False
@@ -98,7 +98,7 @@ if "role" not in st.session_state:
 # --- 2. ЛИЦЕНЗИОННЫЕ КЛЮЧИ ---
 VALID_KEYS = os.getenv("LICENSE_KEYS", "").split(",")
 if not VALID_KEYS or VALID_KEYS == [""]:
-    VALID_KEYS = ["demo-key-2024", "test-key-2025"]
+    VALID_KEYS = ["ключ1", "ключ2", "ключ3"]
 
 def check_license(key):
     return key in VALID_KEYS
@@ -343,9 +343,9 @@ with st.sidebar:
         for line in st.session_state.logs[-20:]:
             st.text(line)
 
-# --- Интервью ---
+# --- Основная часть интервью ---
 if st.session_state.editing:
-    st.info("Включён режим редактирования вопросов.")
+    st.info("Включён режим редактирования вопросов. Настройте вопросы в боковой панели.")
 else:
     if not st.session_state.finished:
         progress = (st.session_state.index + 1) / len(st.session_state.questions)
@@ -388,6 +388,7 @@ else:
                 st.write(f"**{i+1}. {q}**")
                 st.write(a)
 
+        # --- СОХРАНЕНИЕ ДАТАСЕТА ---
         if not st.session_state.demo_mode or st.session_state.role == "admin":
             if st.button("💾 Сохранить датасет (train.jsonl)"):
                 data = []
@@ -410,6 +411,30 @@ else:
         else:
             st.info("Сохранение доступно только в полной версии.")
 
+        # --- НОВАЯ КНОПКА АНАЛИЗА ---
+        if st.button("🔍 Проанализировать ответы"):
+            if any(a.strip() for a in st.session_state.answers):
+                report = analyze_answers(st.session_state.answers)
+                if "error" in report:
+                    st.warning(report["error"])
+                else:
+                    st.subheader("📊 Анализ интервью")
+                    st.write("**Ключевые слова:**", ", ".join(report["keywords"]))
+                    st.write("**Основные темы:**")
+                    for topic in report["topics"]:
+                        st.write(f"- {topic}")
+                    st.write(f"**Всего слов:** {report['total_words']}")
+                    st.write(f"**Средняя длина ответа:** {report['avg_answer_length']} слов")
+                    if report["repeated_words"]:
+                        st.write("**Повторяющиеся идеи:**", ", ".join(report["repeated_words"]))
+                    if report["suggestions"]:
+                        st.subheader("💡 Рекомендации")
+                        for suggestion in report["suggestions"]:
+                            st.write(suggestion)
+            else:
+                st.warning("Нет ответов для анализа. Пройдите интервью.")
+
+        # --- ЭКСПОРТ PDF (уже есть) ---
         st.subheader("📄 Скачать отчёт PDF")
         if st.button("Создать PDF"):
             buffer = BytesIO()
