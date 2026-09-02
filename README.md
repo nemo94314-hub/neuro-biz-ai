@@ -66,3 +66,15 @@ python bot.py
 
 Подробная информация о продукте, ценах и контактах — на нашем сайте:  
 👉 [https://nemo94314-hub.github.io/neuro-biz-ai](https://nemo94314-hub.github.io/neuro-biz-ai)
+
+## 📦 Скачать
+
+👉 [**Скачать NeuroBizAI.exe**](https://github.com/nemo94314-hub/neuro-biz-ai/releases/latest)
+
+Это последняя версия приложения для Windows.  
+Никаких установок — просто запустите файл.
+
+---
+
+Все предыдущие версии:  
+[Releases на GitHub](https://github.com/nemo94314-hub/neuro-biz-ai/releases)
