@@ -26,7 +26,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --windowed --name NeuroBizAI --hidden-import streamlit --hidden-import analyzer --hidden-import graph --hidden-import speech --hidden-import sklearn --hidden-import networkx --hidden-import matplotlib --hidden-import numpy --hidden-import pandas --hidden-import reportlab --add-data "app.py;." --add-data "analyzer.py;." --add-data "graph.py;." --add-data "speech.py;." --add-data "llm_tuner;llm_tuner" --add-data "pages;pages" --add-data "assets;assets" launcher.py
+        pyinstaller --onefile --windowed --name NeuroBizAI --hidden-import streamlit --add-data "app.py;." --add-data "llm_tuner;llm_tuner" --add-data "pages;pages" --add-data "assets;assets" launcher.py
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
