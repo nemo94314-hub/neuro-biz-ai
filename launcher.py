@@ -1,5 +1,7 @@
-import os
 import sys
+sys.setrecursionlimit(5000)  # Увеличиваем лимит рекурсии для PyInstaller
+
+import os
 import streamlit.web.cli as stcli
 
 def main():
