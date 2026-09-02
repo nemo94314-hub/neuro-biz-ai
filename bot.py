@@ -2,7 +2,7 @@ import telebot
 import time
 
 # === НАСТРОЙКИ ===
-TOKEN = "8610638568:AAHe7Xvlxi_UGKjEjSKlpjrHsZuF_PySX8s"
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 bot = telebot.TeleBot(TOKEN)
 
 # === ОБРАБОТЧИКИ КОМАНД ===
