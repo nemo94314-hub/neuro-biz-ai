@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neuro Biz AI</title>
+    <title>Neuro Biz AI — ваш ИИ-ассистент и аналитик</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #0a0e27;
             color: #fff;
             display: flex;
@@ -16,99 +19,166 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            text-align: center;
+            padding: 20px;
+            line-height: 1.6;
         }
         .container {
-            max-width: 800px;
+            max-width: 900px;
+            width: 100%;
             padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
         h1 {
             font-size: 48px;
+            font-weight: 700;
             background: linear-gradient(135deg, #6c63ff, #00d4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
+            letter-spacing: -0.5px;
         }
         .subtitle {
             font-size: 22px;
             color: #ccc;
             margin-bottom: 30px;
+            font-weight: 300;
         }
         .features {
             text-align: left;
             font-size: 18px;
-            line-height: 1.8;
-            margin: 20px 0;
-        }
-        .features li {
+            margin: 30px 0;
+            padding: 0;
             list-style: none;
         }
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
         .features li::before {
-            content: "✅ ";
+            content: "✅";
             color: #6c63ff;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .features li:last-child {
+            border-bottom: none;
         }
         .price {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 700;
             color: #00d4ff;
             margin: 30px 0 20px;
+            background: rgba(0,212,255,0.1);
+            display: inline-block;
+            padding: 8px 30px;
+            border-radius: 60px;
+            border: 1px solid rgba(0,212,255,0.3);
         }
         .btn-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 16px;
             justify-content: center;
+            margin: 30px 0 20px;
         }
         .btn {
             background: linear-gradient(135deg, #6c63ff, #00d4ff);
             color: #fff;
-            padding: 14px 28px;
-            border-radius: 30px;
+            padding: 14px 32px;
+            border-radius: 60px;
             text-decoration: none;
             font-weight: 600;
             font-size: 18px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(108,99,255,0.3);
         }
         .btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+            box-shadow: 0 8px 30px rgba(108,99,255,0.6);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #6c63ff;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: rgba(108,99,255,0.15);
+            box-shadow: none;
         }
         .footer {
             margin-top: 50px;
             color: #666;
             font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
         }
         .footer a {
             color: #6c63ff;
             text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer a:hover {
+            color: #00d4ff;
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 32px;
+            }
+            .subtitle {
+                font-size: 18px;
+            }
+            .btn {
+                font-size: 16px;
+                padding: 12px 24px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>🧠 Neuro Biz AI</h1>
-        <div class="subtitle">Создайте своего ИИ-ассистента на основе вашего опыта</div>
+        <div class="subtitle">Ваш ИИ-ассистент и бизнес-аналитик на основе вашего опыта</div>
 
         <ul class="features">
-            <li>Отвечает на вопросы в вашем стиле</li>
-            <li>Помогает с документами и письмами</li>
-            <li>Всё локально — данные никуда не уходят</li>
+            <li>Отвечает на вопросы в вашем стиле — консультации, письма, документы</li>
+            <li>Обучается на ваших ответах за 20 минут — всё локально, данные никуда не уходят</li>
+            <li>Готовое приложение для Windows — не требует установки Python</li>
+            <li>🔍 Анализирует ваше интервью: выделяет ключевые темы, повторяющиеся идеи и даёт персональные рекомендации</li>
         </ul>
 
         <div class="price">💰 $199 / ~17 000 ₽ за лицензию на 1 год</div>
 
         <div class="btn-group">
             <a href="https://github.com/nemo94314-hub/neuro-biz-ai/releases/latest" class="btn" target="_blank">⬇️ Скачать</a>
-            <a href="mailto:nemo94314@gmail.com" class="btn">📩 Связаться</a>
-            <a href="https://t.me/NeuroBizAIbot" class="btn" target="_blank">🤖 Telegram-бот</a>
+            <a href="mailto:nemo94314@gmail.com" class="btn btn-outline">📩 Связаться</a>
+            <a href="https://t.me/NeuroBizAIbot" class="btn btn-outline" target="_blank">🤖 Telegram-бот</a>
+        </div>
+
+        <div style="margin: 20px 0 10px; font-size: 16px; color: #aaa;">
+            🔍 Анализ интервью — в подарок к каждой лицензии!
         </div>
 
         <div class="footer">
-            © 2026 Neuro Biz AI. Все права защищены.<br>
-            <a href="https://github.com/nemo94314-hub/neuro-biz-ai">GitHub</a> ·
-            <a href="https://t.me/neuro_biz_ai">Telegram-канал</a>
+            <span>© 2026 Neuro Biz AI</span>
+            <a href="https://github.com/nemo94314-hub/neuro-biz-ai" target="_blank">GitHub</a>
+            <a href="https://t.me/neuro_biz_ai" target="_blank">Telegram-канал</a>
+            <a href="https://github.com/nemo94314-hub/neuro-biz-ai/releases" target="_blank">Все релизы</a>
         </div>
     </div>
 </body>
