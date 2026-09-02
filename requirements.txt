@@ -18,4 +18,3 @@ scikit-learn>=1.2.0
 networkx>=3.0
 matplotlib>=3.7.0
 SpeechRecognition>=3.10.0
-pyaudio>=0.2.11
