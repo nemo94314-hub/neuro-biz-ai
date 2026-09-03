@@ -77,25 +77,37 @@ st.markdown(
 # 🔐 БЕЗОПАСНОСТЬ И МОНЕТИЗАЦИЯ
 # ============================================
 
-ADMIN_PASSWORD = "ваш_пароль_здесь"
+# --- 1. ПАРОЛЬ АДМИНИСТРАТОРА (из переменной окружения) ---
+# В Streamlit Cloud добавьте секрет: ADMIN_PASSWORD = "ваш_пароль"
+# Для локальной разработки можно создать файл .env или использовать значение по умолчанию.
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "default_пароль_смени_меня")
+if ADMIN_PASSWORD == "default_пароль_смени_меня":
+    st.error("⚠️ Пароль администратора не настроен. Добавьте секрет ADMIN_PASSWORD в настройках Streamlit Cloud.")
+    st.stop()
 
-if "auth" not in st.session_state:
-    st.session_state.auth = False
-if "role" not in st.session_state:
-    st.session_state.role = None
-
-VALID_KEYS = os.getenv("LICENSE_KEYS", "").split(",")
-if not VALID_KEYS or VALID_KEYS == [""]:
-    VALID_KEYS = ["ключ1", "ключ2", "ключ3"]
+# --- 2. ЛИЦЕНЗИОННЫЕ КЛЮЧИ (из переменной окружения) ---
+# В Streamlit Cloud добавьте секрет: LICENSE_KEYS = "ключ1,ключ2,ключ3"
+LICENSE_KEYS_STR = os.getenv("LICENSE_KEYS", "")
+VALID_KEYS = [k.strip() for k in LICENSE_KEYS_STR.split(",") if k.strip()]
+if not VALID_KEYS:
+    st.warning("⚠️ Лицензионные ключи не настроены. Добавьте секрет LICENSE_KEYS в настройках Streamlit Cloud.")
+    # Для демонстрации можно оставить запасные ключи, но они будут видны в коде. Рекомендуется использовать только переменные окружения.
+    # VALID_KEYS = ["demo-key-2024", "test-key-2025"]  # Раскомментируйте, если нужно для теста
 
 def check_license(key):
     return key in VALID_KEYS
 
+# --- 3. ИНИЦИАЛИЗАЦИЯ СОСТОЯНИЯ ---
+if "auth" not in st.session_state:
+    st.session_state.auth = False
+if "role" not in st.session_state:
+    st.session_state.role = None
 if "license_valid" not in st.session_state:
     st.session_state.license_valid = False
 if "demo_mode" not in st.session_state:
     st.session_state.demo_mode = False
 
+# --- 4. ЭКРАН ВХОДА ---
 if not st.session_state.auth:
     st.set_page_config(page_title="Neuro Biz AI", layout="centered", page_icon="🧠")
     st.image("assets/logo.svg", width=200)
@@ -148,13 +160,14 @@ if not st.session_state.auth:
 
     st.stop()
 
+# --- 5. ЛОГИРОВАНИЕ ЗАПУСКА ---
 role_label = "Админ" if st.session_state.role == "admin" else "Пользователь"
 log_entry = f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} — Запуск приложения (роль: {role_label})\n"
 with open("access.log", "a", encoding="utf-8") as log_file:
     log_file.write(log_entry)
 
 # ============================================
-# ОСНОВНОЙ КОД ПРИЛОЖЕНИЯ
+# ОСНОВНОЙ КОД ПРИЛОЖЕНИЯ (без изменений)
 # ============================================
 
 st.set_page_config(page_title="Neuro Biz AI", layout="centered", page_icon="🧠")
